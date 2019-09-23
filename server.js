@@ -1,15 +1,36 @@
 'use strict';
 
 const express = require('express');
+const LanguageTranslatorV3 = require('ibm-watson/language-translator/v3');
 
-// Constants
 const PORT = 8080;
 const HOST = '0.0.0.0';
+const NLP_VERSION = '2018-05-01';
+const NLP_URL = 'https://gateway.watsonplatform.net/language-translator/api';
 
-// App
+const languageTranslator = new LanguageTranslatorV3({
+  version: NLP_VERSION,
+  iam_apikey: process.env.nlp_key,
+  url: NLP_URL,
+});
+
 const app = express();
 app.get('/', (req, res) => {
-  res.send('Hello world\n');
+  const translateParams = {
+    text: req.query.text,
+    model_id: req.query.lang ? req.query.lang : 'en-es',
+  };
+
+  languageTranslator.translate(translateParams)
+    .then(translationResult => {
+      console.log(JSON.stringify(translationResult, null, 2));
+      res.send(JSON.stringify(translationResult, null, 2));
+    })
+    .catch(err => {
+      console.log('error:', err);
+      res.send('Something went wrong!\n');
+    });
+
 });
 
 app.listen(PORT, HOST);
