@@ -16,6 +16,15 @@ const languageTranslator = new LanguageTranslatorV3({
 
 const app = express();
 app.get('/', (req, res) => {
+
+  if(!req.query.text) {
+    res.send('You must pass in the text to translate with the url using ?text=text!\n');
+  }
+
+  if(!req.query.lang) {
+      console.log('No language passed to translate to. Converting to Spanish by default.');
+  }
+
   const translateParams = {
     text: req.query.text,
     model_id: req.query.lang ? req.query.lang : 'en-es',
