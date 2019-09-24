@@ -144,3 +144,48 @@ You should now see the same text translated to German:
 You can see the supported languages `(both from and to)` in the [Language Translator documentation](https://cloud.ibm.com/docs/services/language-translator?topic=language-translator-translation-models).
 
 **How cool was that!** You just containerzied a Node.js application that provides transation services.
+
+## Clean up <OPTIONAL>
+### Step 9 - stop the container
+You can first stop the container. You need the container tag or the id to stop it. Let's look it up first
+
+```
+docker ps | grep node-container
+
+419104eff9be        upkar/node-container                           "docker-entrypoint.s…"   3 minutes ago       Up 3 minutes                       0.0.0.0:8080->8080/tcp                            cranky_davinci
+```
+In my case, the container is called `cranky_davinci` and has an id of `419104eff9be`.
+
+Stop the image with the following command. You can replace the id with your container id.
+
+```
+docker container stop 419104eff9be
+```
+
+### Step 10 - remove the container
+Run the following command to remove the container. Replace the id with your container id identified in the step above.
+```
+docker container rm 419104eff9be
+```
+### Step 11 - remove the image
+You can now delete the image. You again need the image id. 
+
+```
+$ docker images | grep node-container
+upkar/node-container                       latest                         8baa6ca9cdac        5 minutes ago       958MB
+```
+
+Now, delete the image as follows.
+
+```
+$ docker image rm 8baa6ca9cdac
+Untagged: upkar/node-container:latest
+Deleted: sha256:8baa6ca9cdac8868d8e17642e90b433c7aa588a615b59ac9b528fb8635698a6e
+Deleted: sha256:8c279f530b3ff260279f9cb8d22d167d748e53df4f6eab91b089b6c90b4da9f2
+Deleted: sha256:9845fb86e05aa69c677dc999b6bbdeceafc460e70604092e0247e0f8880ec93e
+Deleted: sha256:84ea0148452752e2aba0a1e1ef963355781a3fb87e485e9a440e8e8fc002d045
+Deleted: sha256:f4f99031ae0d1cf0079d9981ef6e8dff2231eff670ac7ea4a4f27472282d7ad2
+Deleted: sha256:bf579e37b35bb7b20ed0cb3140220118cbbd1d0564a512f21868568b3683a392
+Deleted: sha256:07b958722eb2513e88186b2f6eddadcec0b8772001a598244352073ac5caf176
+Deleted: sha256:361c46840912a7b9539b6ddf00164492fc594701085f0e2c9d2c1544bca8498c
+```
