@@ -49,18 +49,54 @@ Change into the directory you just cloned and build the docker image
 cd nodejs-docker
 docker build -t <docker-username>/node-container .
 ```
-The `docker-username` is optional if you want to publish your image to [Dockerhub](https://hub.docker.com/).
+The `docker-username` is required if you want to publish your image to [Dockerhub](https://hub.docker.com/).
+
 
 Alternatively, you can also build directly from github using the following command without cloning the repository: 
 ```
-docker build -t upkar/node-container https://github.com/lidderupk/nodejs-docker.git
+docker build -t <docker-username>/node-container https://github.com/lidderupk/nodejs-docker.git
 ```
 
-This command uses the [Dockerfile](./Dockerfile) to download a Node.js 10 base image and then install our Express.js application on top. It then open
+This command uses the [Dockerfile](./Dockerfile) to download a Node.js 10 base image and then install our Express.js application on top. Let's explore the contents of this docker file ...
+
+```
+FROM node:10
+```
+... builds our image on top of the Node.js 10 image.
+
+```
+WORKDIR /usr/src/app
+```
+... creates a working directory for our application to live in.
+
+```
+COPY package*.json ./
+```
+... copies the `package.json` file to our working directory.
+
+```
+RUN npm install
+```
+... install our dependencies. We just have two dependencies in this application: `express` and `ibm-watson`.
+
+```
+COPY . .
+```
+... copy the rest of our source code into the docker image
+
+```
+EXPOSE 8080
+```
+... expose port 8080. We will still have to forward our local port to this docker container port later.
+
+```
+CMD [ "node", "server.js" ]
+```
+... starts the application by running `node server.js`.
 
 ### Step 7 - run the docker image
 ```
-docker run -p 8080:8080 -e "nlp_key=<api_key>" -d upkar/node-container
+docker run -p 8080:8080 -e "nlp_key=<api_key>" -d <docker-username>/node-container
 ```
 
 In my case, I would run
