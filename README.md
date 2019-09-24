@@ -38,8 +38,9 @@ If you do not see a credential provided for you, you can create a new set of cre
 **Congratulations!** You just signed up for IBM Cloud account and created your first `Language Translator` service. The next steps will show you how to build a Docker container for a Node.js application that provides an end point to translate text!
 
 ### Step 5 - clone repository
-Open your local terminal or the web terminal provided in the workshop and clone this repository.
+Open your local terminal or the web terminal provided in the workshop and change to the `/data` directory. Close this directory.
 ```
+cd data
 git clone https://github.com/lidderupk/nodejs-docker.git
 ```
 
@@ -188,4 +189,29 @@ Deleted: sha256:f4f99031ae0d1cf0079d9981ef6e8dff2231eff670ac7ea4a4f27472282d7ad2
 Deleted: sha256:bf579e37b35bb7b20ed0cb3140220118cbbd1d0564a512f21868568b3683a392
 Deleted: sha256:07b958722eb2513e88186b2f6eddadcec0b8772001a598244352073ac5caf176
 Deleted: sha256:361c46840912a7b9539b6ddf00164492fc594701085f0e2c9d2c1544bca8498c
+```
+
+## Troubleshooting
+### Check container logs
+You can check the logs for your container using
+```
+docker logs <container_id>
+```
+
+For example ...
+```
+root@terminal-5-846448d675-bk75j:/data# docker logs 4450279a9f50   
+
+
+Running on http://0.0.0.0:8080
+No language passed to translate to. Converting to Spanish by default.
+{
+  "translations": [
+    {
+      "translation": "Hola"
+    }
+  ],
+  "word_count": 1,
+  "character_count": 5
+}
 ```
