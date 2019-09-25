@@ -142,6 +142,36 @@ You should now see the same text translated to German:
 }
 ```
 
+Another example ...
+```
+curl "localhost:8080/translate?text=People+are+suffering.+People+are+dying+and+dying+ecosystems+are+collapsing.+We+are+in+the+beginning+of+a+mass+extinction%2C+and+all+you+can+talk+about+is+the+money+and+fairy+tales+of+eternal+economic+growth"
+
+
+{
+  "translations": [
+    {
+      "translation": "La gente está sufriendo. La gente está muriendo y los ecosistemas moribundos se están derrumbando. Estamos en el principio de una extinción masiva, y todo lo que se puede hablar es el dinero y los cuentos de hadas del crecimiento económico eterno"
+    }
+  ],
+  "word_count": 39,
+  "character_count": 204
+}
+```
+in Polish
+
+```
+curl "localhost:8080/translate?text=People+are+suffering.+People+are+dying+and+dying+ecosystems+are+collapsing.+We+are+in+the+beginning+of+a+mass+extinction%2C+and+all+you+can+talk+about+is+the+money+and+fairy+tales+of+eternal+economic+growth&lang=en-pl"
+{
+  "translations": [
+    {
+      "translation": "Ludzie cierpią. Ludzie umierają, a umierające ekosystemy się zapadają. Jesteśmy na początku masowego wyginięcia, a wszystko, o czym można rozmawiać, to pieniądze i bajki o wiecznym wzroście gospodarczym"
+    }
+  ],
+  "word_count": 39,
+  "character_count": 204
+}
+```
+
 You can see the supported languages `(both from and to)` in the [Language Translator documentation](https://cloud.ibm.com/docs/services/language-translator?topic=language-translator-translation-models).
 
 **How cool was that!** You just containerzied a Node.js application that provides transation services.
@@ -213,5 +243,112 @@ No language passed to translate to. Converting to Spanish by default.
   ],
   "word_count": 1,
   "character_count": 5
+}
+```
+
+## Stretch goal
+Congratulations again on creating your first docker container that hosts a Natural Language Translation service! Here is your next challenge if you choose to accept it!
+
+**Create a second image using the same Node.js 10 base image. Run a container based on this image. This container will host a tone analyzer service on port 8081. The service should expose an end point of /analyze, accept a parameter called text and give back the sentiment score on it.** 
+
+Here are some hints to get you started ...
+
+1. Create and change to a different directory `/data/tone-container` and clone the github repo `https://github.com/lidderupk/nodejs-docker`.
+2. Create a `Tone Analyzer` service from `IBM Cloud`. You can search for tone analyzer in the catalog and pick the `lite` plan.
+3. Copy the credentials somewhere safe. You will need the `apikey` in the next few steps.
+4. Change the `/translate` endpoint to `/analyze` and write the code to return sentiments for the text in the request parameter. You can find the code in the [API documentation for Tone Analyzer](https://cloud.ibm.com/apidocs/tone-analyzer?code=node#analyze-general-tone-get). If you are running out time, [I have provided sample code here](https://ibm.biz/tone-analyze-code).
+5. Build a new image and call it `<docker-user>/tone-container`.
+```
+cd /data/tone-container/nodejs-docker
+docker build -t upkar/tone-container .
+```
+6. Run a container based on the `<docker-user>/tone-container` image. Note that we are forwarding local 8081 to docker 8080. This is so that we don't create a conflict with the previous translator container.
+```
+docker run -p 8081:8080 -e "tone_key=<tone-analyzer-key>" -d upkar/tone-container
+
+```
+Make sure to change the `tone_key` to your tone analyzer key.
+
+You should now have two containers running in your terminal ...
+```
+NAMES                       IMAGE                                            STATUS
+inspiring_nash              upkar/node-container                             Up 4 minutes
+quizzical_thompson          upkar/tone-container                             Up 5 minutes
+```
+
+Test your new tone analyzer container as follows ...
+
+Example 1
+```
+curl "localhost:8081/analyze?text=life%20is%20good"
+```
+
+Result
+```
+{
+  "document_tone": {
+    "tones": [
+      {
+        "score": 0.83112,
+        "tone_id": "joy",
+        "tone_name": "Joy"
+      }
+    ]
+  }
+}
+```
+
+
+Example 2
+```
+curl "localhost:8081/analyze?text=People+are+suffering.+People+are+dying+and+dying+ecosystems+are+collapsing.+We+are+in+the+beginning+of+a+mass+extinction%2C+and+all+you+can+talk+about+is+the+money+and+fairy+tales+of+eternal+economic+growth"
+```
+
+Result
+```
+{
+  "document_tone": {
+    "tones": [
+      {
+        "score": 0.819121,
+        "tone_id": "sadness",
+        "tone_name": "Sadness"
+      },
+      {
+        "score": 0.686032,
+        "tone_id": "confident",
+        "tone_name": "Confident"
+      }
+    ]
+  },
+  "sentences_tone": [
+    {
+      "sentence_id": 0,
+      "text": "People are suffering.",
+      "tones": [
+        {
+          "score": 0.830428,
+          "tone_id": "sadness",
+          "tone_name": "Sadness"
+        }
+      ]
+    },
+    {
+      "sentence_id": 1,
+      "text": "People are dying and dying ecosystems are collapsing.",
+      "tones": [
+        {
+          "score": 0.840601,
+          "tone_id": "sadness",
+          "tone_name": "Sadness"
+        }
+      ]
+    },
+    {
+      "sentence_id": 2,
+      "text": "We are in the beginning of a mass extinction, and all you can talk about is the money and fairy tales of eternal economic growth",
+      "tones": []
+    }
+  ]
 }
 ```
