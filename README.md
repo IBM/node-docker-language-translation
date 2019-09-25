@@ -1,5 +1,5 @@
 # Workshop for Containers Developer Summit
-This workshop is an introduction to Docker, which is a runtime for containers. We will create a `containerized` Node.js application that provides a service to translate phrases from one language to another. The application uses the [IBM Language Transation service](https://www.ibm.com/watson/services/language-translator/).
+This workshop is an introduction to Docker, which is a runtime for containers. We will create a `containerized` Node.js application that provides a service to translate phrases from one language to another. The application uses the [IBM Language Translation service](https://www.ibm.com/watson/services/language-translator/).
 ## Environment
 You can use one of the following environments for this workshop
 1. Install `docker` locally using [Docker Desktop](https://www.docker.com/products/docker-desktop).
