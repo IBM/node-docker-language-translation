@@ -108,7 +108,7 @@ docker run -p 8080:8080 -e "nlp_key=T1ReDZISYE4cpqQnQHKTWe1F9iUy6hhxkRu0aWqzmxQ3
 
 ### Step 8 - test the application
 ```
-curl "localhost:8080?text=how%20are%20you"
+curl "localhost:8080/translate?text=how%20are%20you"
 ```
 
 You should see output as follows: 
@@ -126,7 +126,7 @@ You should see output as follows:
 
 The text is translated to Spanish `(en-sp)` by default. You can specify the langauge by passing in the lang flag as follows: 
 ```
-curl "localhost:8080?text=how%20are%20you?&lang=en-de"
+curl "localhost:8080/translate?text=how%20are%20you?&lang=en-de"
 ```
 
 You should now see the same text translated to German:  

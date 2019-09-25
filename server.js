@@ -15,7 +15,7 @@ const languageTranslator = new LanguageTranslatorV3({
 });
 
 const app = express();
-app.get('/', (req, res) => {
+app.get('/translate', (req, res) => {
 
   if(!req.query.text) {
     res.send('You must pass in the text to translate with the url using ?text=text!\n');
