@@ -12,7 +12,7 @@ Sign up for IBM Cloud here: https://ibm.biz/containers-lab
 ![IBM sign up](assets/ibm-sign-up.jpg)
 
 ### Step 2 - activate your account
-Click on the link in the email you recieved from IBM to activate your cloud account. Make sure you check the spam folder in your email.
+Click on the link in the email you received from IBM to activate your cloud account. Make sure you check the spam folder in your email.
 ### Step 3 - create a language translation service
 Log back into your IBM Cloud account using this URL: https://ibm.biz/containers-lab
 
