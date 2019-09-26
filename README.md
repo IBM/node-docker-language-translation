@@ -50,7 +50,11 @@ Change into the directory you just cloned and build the docker image
 cd nodejs-docker
 docker build -t <docker-username>/node-container .
 ```
-The `docker-username` is required if you want to publish your image to [Dockerhub](https://hub.docker.com/).
+The `docker-username` is required if you want to publish your image to [Dockerhub](https://hub.docker.com/). 
+
+```
+If you do not have a Docker account - you would need to create one directly on hub.docker.com - choose sign in button.
+```
 
 
 Alternatively, you can also build directly from github using the following command without cloning the repository: 
