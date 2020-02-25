@@ -97,13 +97,14 @@ CMD [ "node", "server.js" ]
 
 ### Step 7 - run the docker image
 ```
-docker run -p 8080:8080 -e "nlp_key=<api_key>" -d <docker-username>/node-container
+docker run -p 8080:8080 -e nlp_key=<api_key> -e nlp_url="<api_url>" -d <docker-username>/node-container
 ```
 
 In my case, I would run
 
 ```
-docker run -p 8080:8080 -e "nlp_key=T1ReDZISYE4cpqQnQHKTWe1F9iUy6hhxkRu0aWqzmxQ3" -d upkar/node-container
+docker run -p 8080:8080 -e nlp_key=tYCDgJhqWPn0f7zdUVRpzXhvgf64leLcWWNoxYmaIoSn -e nlp_url="https://api.eu-gb.language-translator.watson.cloud.ibm.com/instances/743f0ce5-dae3-4442-a375-ba56d9c5f32e" -d upkar/node-container
+
 ```
 
 ### Step 8 - test the application
