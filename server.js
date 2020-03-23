@@ -5,12 +5,13 @@ const LanguageTranslatorV3 = require('ibm-watson/language-translator/v3');
 
 const PORT = 8080;
 const HOST = '0.0.0.0';
+
 const LT_VERSION = '2018-05-01';
-const LT_URL = 'https://gateway.watsonplatform.net/language-translator/api';
+const LT_URL = process.env.lt_url;
 
 const languageTranslator = new LanguageTranslatorV3({
   version: LT_VERSION,
-  iam_apikey: process.env.nlp_key,
+  iam_apikey: process.env.lt_key,
   url: LT_URL,
 });
 

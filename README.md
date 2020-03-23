@@ -41,7 +41,7 @@ If you do not see a credential provided for you, you can create a new set of cre
 Open your local terminal or the web terminal provided in the workshop and change to the `/data` directory. Close this directory.
 ```
 cd data
-git clone https://github.com/lidderupk/nodejs-docker.git
+git clone https://github.com/IBM/docker-nodejs-language-service.git
 ```
 
 ### Step 6 - build the docker image
@@ -55,7 +55,7 @@ The `docker-username` is required if you want to publish your image to [Dockerhu
 
 Alternatively, you can also build directly from github using the following command without cloning the repository: 
 ```
-docker build -t <docker-username>/node-container https://github.com/lidderupk/nodejs-docker.git
+docker build -t <docker-username>/node-container https://github.com/IBM/docker-nodejs-language-service.git
 ```
 
 This command uses the [Dockerfile](./Dockerfile) to download a Node.js 10 base image and then install our Express.js application on top. Let's explore the contents of this docker file ...
@@ -97,13 +97,14 @@ CMD [ "node", "server.js" ]
 
 ### Step 7 - run the docker image
 ```
-docker run -p 8080:8080 -e "nlp_key=<api_key>" -d <docker-username>/node-container
+docker run -p 8080:8080 -e lt_key=<api_key> -e lt_url="<api_url>" -d <docker-username>/node-container
 ```
 
 In my case, I would run
 
 ```
-docker run -p 8080:8080 -e "nlp_key=T1ReDZISYE4cpqQnQHKTWe1F9iUy6hhxkRu0aWqzmxQ3" -d upkar/node-container
+docker run -p 8080:8080 -e lt_key=tYCDgJhqWPn0f7zdUVRpzXhvgf64leLcWWNoxYmaIoSn -e lt_url="https://api.eu-gb.language-translator.watson.cloud.ibm.com/instances/743f0ce5-dae3-4442-a375-ba56d9c5f32e" -d ibmworkshop/node-container
+
 ```
 
 ### Step 8 - test the application
@@ -253,7 +254,7 @@ Congratulations again on creating your first docker container that hosts a Natur
 
 Here are some hints to get you started ...
 
-1. Create and change to a different directory `/data/tone-container` and clone the github repo `https://github.com/lidderupk/nodejs-docker`.
+1. Create and change to a different directory `/data/tone-container` and clone the github repo `https://github.com/IBM/docker-nodejs-language-service.git`.
 2. Create a `Tone Analyzer` service from `IBM Cloud`. You can search for tone analyzer in the catalog and pick the `lite` plan.
 3. Copy the credentials somewhere safe. You will need the `apikey` in the next few steps.
 4. Change the `/translate` endpoint to `/analyze` and write the code to return sentiments for the text in the request parameter. You can find the code in the [API documentation for Tone Analyzer](https://cloud.ibm.com/apidocs/tone-analyzer?code=node#analyze-general-tone-get). If you are running out time, [I have provided sample code here](https://ibm.biz/tone-analyze-code).
