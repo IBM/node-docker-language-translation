@@ -79,6 +79,7 @@ This command uses the [Dockerfile](./Dockerfile) to download a Node.js 10 base i
 ```console
 FROM node:10
 ```
+
 ... builds our image on top of the Node.js 10 image.
 
 ```console
@@ -206,7 +207,7 @@ You can see the supported languages `(both from and to)` in the [Language Transl
 
 **How cool was that!** You just containerzied a Node.js application that provides transation services.
 
-## Clean up <OPTIONAL>
+## Clean up (this is optional)
 
 ### Step 9 - stop the container
 
