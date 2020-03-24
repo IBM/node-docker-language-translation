@@ -1,8 +1,8 @@
-# Docker NodeJS Language Service Example
+# Docker NodeJS Language Translation Example
 
-This repository is an introduction to Docker, which is a runtime for containers. We will create a `containerized` Node.js application that provides a service to translate phrases from one language to another. The application uses the [IBM Language Translation service](https://www.ibm.com/watson/services/language-translator/).
+This repository is an introduction to Docker, which is a runtime for containers. We will create a containerized Node.js application that provides a service to translate phrases from one language to another. The application uses the Watson [Language Translation service](https://www.ibm.com/watson/services/language-translator/).
 
-## Environment
+## Running the application
 
 You can use one of the following environments for this workshop
 1. Install `docker` locally using [Docker Desktop](https://www.docker.com/products/docker-desktop).
@@ -396,6 +396,7 @@ Result
   ]
 }
 ```
+A complete step-by-step guide for running the application as a container can be found in our [OpenShift 101 workshop](https://ibm-developer.gitbook.io/openshift101/getting-started/docker).
 
 ## License & Authors
 
