@@ -12,7 +12,7 @@ You can use one of the following environments for this workshop
 
 ### Step 1 - sign up on IBM Cloud
 
-Sign up for IBM Cloud here: https://ibm.biz/containers-lab
+Sign up for IBM Cloud here: https://cloud.ibm.com
 ![IBM sign up](assets/ibm-sign-up.jpg)
 
 ### Step 2 - activate your account
@@ -21,7 +21,7 @@ Click on the link in the email you received from IBM to activate your cloud acco
 
 ### Step 3 - create a language translation service
 
-Log back into your IBM Cloud account using this URL: https://ibm.biz/containers-lab
+Log back into your IBM Cloud account using this URL: https://cloud.ibm.com
 
 Click on Catalog
 ![IBM catalog](assets/catalog.jpg)
