@@ -12,7 +12,7 @@ You can use one of the following environments for this workshop
 
 ### Step 1 - sign up on IBM Cloud
 
-Sign up for IBM Cloud here: https://cloud.ibm.com
+Sign up for IBM Cloud here: <https://cloud.ibm.com>
 ![IBM sign up](assets/ibm-sign-up.jpg)
 
 ### Step 2 - activate your account
@@ -21,7 +21,7 @@ Click on the link in the email you received from IBM to activate your cloud acco
 
 ### Step 3 - create a language translation service
 
-Log back into your IBM Cloud account using this URL: https://cloud.ibm.com
+Log back into your IBM Cloud account using this URL: <https://cloud.ibm.com>
 
 Click on Catalog
 ![IBM catalog](assets/catalog.jpg)
@@ -69,6 +69,7 @@ The `docker-username` is required if you want to publish your image to [Dockerhu
 We also have the container published to `ibmworkshop` docker hub namespace, you would like to just pull ours down.
 
 Alternatively, you can also build directly from github using the following command without cloning the repository:
+
 ```bash
 docker build -t <docker-username>/node-container https://github.com/IBM/docker-nodejs-language-service.git
 ```
@@ -83,6 +84,7 @@ FROM node:10
 ```console
 WORKDIR /usr/src/app
 ```
+
 ... creates a working directory for our application to live in.
 
 ```console
@@ -106,6 +108,7 @@ COPY . .
 ```console
 EXPOSE 8080
 ```
+
 ... expose port 8080. We will still have to forward our local port to this docker container port later.
 
 ```console
@@ -122,7 +125,7 @@ docker run -p 8080:8080 -e lt_key=<api_key> -e lt_url="<api_url>" -d <docker-use
 
 In my case, I would run
 
-```
+```bash
 docker run -p 8080:8080 -e lt_key=tYCDgJhqWPn0f7zdUVRpzXhvgf64leLcWWNoxYmaIoSn -e lt_url="https://api.eu-gb.language-translator.watson.cloud.ibm.com/instances/743f0ce5-dae3-4442-a375-ba56d9c5f32e" -d ibmworkshop/node-container
 
 ```
@@ -266,6 +269,7 @@ docker logs <container_id>
 ```
 
 For example ...
+
 ```bash
 root@terminal-5-846448d675-bk75j:/data# docker logs 4450279a9f50
 
@@ -327,6 +331,7 @@ curl "localhost:8081/analyze?text=life%20is%20good"
 ```
 
 Result
+
 ```json
 {
   "document_tone": {
@@ -341,7 +346,6 @@ Result
 }
 ```
 
-
 Example 2
 
 ```bash
@@ -349,6 +353,7 @@ curl "localhost:8081/analyze?text=People+are+suffering.+People+are+dying+and+dyi
 ```
 
 Result
+
 ```json
 {
   "document_tone": {
@@ -396,6 +401,7 @@ Result
   ]
 }
 ```
+
 A complete step-by-step guide for running the application as a container can be found in our [OpenShift 101 workshop](https://ibm-developer.gitbook.io/openshift101/getting-started/docker).
 
 ## License & Authors
