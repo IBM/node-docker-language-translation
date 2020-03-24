@@ -9,6 +9,7 @@ before_install:
 script:
   - 'make test'
   - 'make image'
+  - 'markdownlint --config .markdownlint.json README.md'
 
 # To have `DOCKER_USERNAME` and `DOCKER_PASSWORD`
 # use `travis env set DOCKER_USERNAME ...`

@@ -5,6 +5,7 @@ set -o errexit
 main() {
   setup_dependencies
   update_docker_configuration
+  install_markdownlint_cli
 
   echo "SUCCESS:
   Done! Finished setting up Travis machine.
@@ -17,7 +18,7 @@ setup_dependencies() {
   "
 
   sudo apt update -y
-  sudo apt install --only-upgrade docker-ce -y
+  sudo apt install --only-upgrade docker-ce npm -y
   docker info
 }
 
@@ -33,6 +34,10 @@ update_docker_configuration() {
   "max-concurrent-uploads": 50
 }' | sudo tee /etc/docker/daemon.json
   sudo service docker restart
+}
+
+install_markdownlint_cli() {
+  npm -g install markdownlint-cli
 }
 
 main
