@@ -7,7 +7,7 @@ const PORT = 8080;
 const HOST = '0.0.0.0';
 
 const LT_VERSION = '2018-05-01';
-const LT_URL = process.env.lt_url || 'https://gateway.watsonplatform.net/language-translator/api';
+const LT_URL = process.env.lt_url || 'https://api.us-south.language-translator.watson.cloud.ibm.com';
 //const PORT = process.env.PORT || 3000;
 
 
